@@ -2,19 +2,18 @@ import math
 
 
 SHADOW_DIVIDER = 5
-FRACTIONAL_VOTING_THRESHOLD = 1250
+FRACTIONAL_VOTING_THRESHOLD = 2500
 FVLSD = FRACTIONAL_VOTING_THRESHOLD / SHADOW_DIVIDER
 
+print("<table>")
 for shadow_rank in range(101):
 	if shadow_rank == 0:
 		continue
 
-	print("#################")
 	for r in range(21):
 		if r == 0:
 			continue
 
-    # Hacky just to get a variation of steem power levels
 		steem_power = r*r*r*r*5
 
 		vote_curr = math.floor((shadow_rank / SHADOW_DIVIDER))
@@ -23,5 +22,7 @@ for shadow_rank in range(101):
 
 		vote_new = round( ( ( ( shadow_rank + (steem_power/ FVLSD) ) / 2 ) / SHADOW_DIVIDER), 1)
 
-
-		print("SR: {}\t SP: {}\t OLD: {} \t NEW: {}".format(shadow_rank, steem_power, vote_curr, vote_new))
+		print("<tr>")
+		print("<td>SR</td><td>{}</td><td>SP</td><td>{}</td><td>OLD</td><td>{}</td><td>NEW</td><td>{}</td>".format(shadow_rank, steem_power, vote_curr, vote_new))
+		print("</tr>")
+print("</table>")
